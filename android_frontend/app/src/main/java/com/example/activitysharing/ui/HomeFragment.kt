@@ -24,11 +24,6 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (Firebase.auth.currentUser != null) {
-
-        } else {
-            findNavController().navigate(R.id.action_home_to_loginFragment)
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

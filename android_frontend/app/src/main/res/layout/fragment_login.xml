@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:layout_marginTop="26dp"
+            app:endIconMode="password_toggle"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText

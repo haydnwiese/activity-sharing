@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
@@ -15,6 +16,7 @@ import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +32,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
-        if (destination.id == R.id.login) {
-            Timber.d("Login Fragment")
+        when(destination.id) {
+            R.id.loginFragment -> binding.bottomNav.visibility = View.GONE
+            else -> binding.bottomNav.visibility = View.VISIBLE
         }
     }
 

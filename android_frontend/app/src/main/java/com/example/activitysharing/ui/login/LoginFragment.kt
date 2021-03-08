@@ -1,5 +1,6 @@
 package com.example.activitysharing.ui.login
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,6 +39,15 @@ class LoginFragment : Fragment() {
         viewModel.authenticationState.observe(viewLifecycleOwner, Observer { authenticationState ->
             if (authenticationState == LoginViewModel.AuthenticationState.AUTHENTICATED) {
                 findNavController().navigate(R.id.action_login_to_home)
+            }
+        })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
+            if (errorMessage != null) {
+                AlertDialog.Builder(activity)
+                    .setMessage(errorMessage)
+                    .create()
+                    .show()
             }
         })
     }

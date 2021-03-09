@@ -33,7 +33,10 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
         when(destination.id) {
-            R.id.loginFragment -> binding.bottomNav.visibility = View.GONE
+            R.id.loginFragment -> {
+                binding.bottomNav.visibility = View.GONE
+                binding.topAppBar.visibility = View.GONE
+            }
             else -> binding.bottomNav.visibility = View.VISIBLE
         }
     }

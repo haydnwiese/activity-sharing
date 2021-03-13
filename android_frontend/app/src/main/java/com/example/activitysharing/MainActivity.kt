@@ -27,18 +27,15 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        NavigationUI.setupWithNavController(binding.bottomNav, navController)
         navController.addOnDestinationChangedListener(this)
     }
 
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
-        when(destination.id) {
-            R.id.loginFragment -> {
-                binding.bottomNav.visibility = View.GONE
-                binding.topAppBar.visibility = View.GONE
-            }
-            else -> binding.bottomNav.visibility = View.VISIBLE
+        val visibility = when(destination.id) {
+            R.id.loginFragment -> View.GONE
+            else -> View.VISIBLE
         }
+        binding.topAppBar.visibility = visibility
     }
 
 }

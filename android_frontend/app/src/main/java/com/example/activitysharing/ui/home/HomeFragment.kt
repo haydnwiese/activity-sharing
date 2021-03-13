@@ -1,4 +1,4 @@
-package com.example.activitysharing.ui
+package com.example.activitysharing.ui.home
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.activitysharing.R
+import com.example.activitysharing.ui.login.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -19,21 +21,12 @@ import java.util.concurrent.Executors
 
 class HomeFragment : Fragment() {
 
-    private lateinit var auth: FirebaseAuth
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
 }

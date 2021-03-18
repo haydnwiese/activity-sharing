@@ -1,4 +1,4 @@
-package com.example.activitysharing.ui.home
+package com.example.activitysharing.ui.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.activitysharing.R
 
-class HomeFragment : Fragment() {
+class FeedFragment : Fragment() {
 
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: FeedViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 

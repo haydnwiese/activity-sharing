@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.activitysharing.ui.feed.FeedFragment"
+        android:name="com.example.activitysharing.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home"/>
 </navigation>

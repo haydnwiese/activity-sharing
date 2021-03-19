@@ -1,4 +1,4 @@
-package com.example.activitysharing.ui.feed
+package com.example.activitysharing.ui.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.activitysharing.data.api.EventService
 import kotlinx.coroutines.launch
 
-class FeedViewModel: ViewModel() {
+class HomeViewModel: ViewModel() {
     init {
         fetchUpcomingEvents()
     }

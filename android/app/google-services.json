@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "780920472102",
+    "project_id": "activity-sharing",
+    "storage_bucket": "activity-sharing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780920472102:android:87cf9a2bba219b8a1a9ce7",
+        "android_client_info": {
+          "package_name": "com.example.activitysharing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780920472102-tn72469tep18a26f3er1cmjfqen00k2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1V_7iSz9hvGCxYwBVC3Fyem_u6eQMJ6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780920472102-tn72469tep18a26f3er1cmjfqen00k2f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,22 +16,20 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
+    private val eventAdapter = EventAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = FragmentHomeBinding.inflate(layoutInflater)
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding.recyclerView.adapter = eventAdapter
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val eventAdapter = EventAdapter()
-        binding.recyclerView.adapter = eventAdapter
-
         viewModel.upcomingEvents.observe(viewLifecycleOwner, { events ->
-            Log.d("HomeFragment", "Here")
             eventAdapter.submitList(events.toMutableList())
         })
     }

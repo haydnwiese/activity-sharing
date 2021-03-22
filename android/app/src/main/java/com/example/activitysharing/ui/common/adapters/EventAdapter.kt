@@ -14,7 +14,6 @@ import com.example.activitysharing.ui.common.view_holders.EventViewHolder
 class EventAdapter: ListAdapter<Event, EventViewHolder>(EventDiffCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val binding = ListItemEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        Log.d("EventAdapter", "Create viewholder")
         return EventViewHolder(binding)
     }
 

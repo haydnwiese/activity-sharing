@@ -23,7 +23,6 @@ class HomeViewModel: ViewModel() {
         viewModelScope.launch {
             val events = EventService().fetchUpcomingEvents("haydn")
             _upcomingEvents.value = events
-            Log.d("HomeViewModel", events.first().name)
         }
     }
 }

@@ -18,6 +18,7 @@ class EventAdapter: ListAdapter<Event, EventViewHolder>(EventDiffCallBack) {
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val item = getItem(position)
+        holder.bind(item)
     }
 }

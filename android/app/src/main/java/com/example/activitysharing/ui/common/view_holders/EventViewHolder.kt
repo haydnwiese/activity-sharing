@@ -7,7 +7,7 @@ import com.example.activitysharing.databinding.ListItemEventBinding
 class EventViewHolder(private val binding: ListItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: Event) {
         binding.run {
-            eventTitle.text = item.name
+            eventTitle.text = item.eventName
         }
     }
 }

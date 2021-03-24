@@ -1,4 +1,4 @@
-package com.example.activitysharing.data.model
+package com.example.activitysharing.data.domain
 
 import androidx.recyclerview.widget.DiffUtil
 

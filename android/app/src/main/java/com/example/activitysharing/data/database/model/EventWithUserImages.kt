@@ -8,7 +8,7 @@ data class EventWithUserImages(
     val event: DatabaseEvent,
     @Relation(
         parentColumn = "id",
-        entityColumn = "eventId"
+        entityColumn = "event_id"
     )
-    val userDisplayImages: List<UserDisplayImage>
+    val eventUserDisplayImages: List<EventUserDisplayImage>
 )

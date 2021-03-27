@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.activitysharing.data.database.model.DatabaseEvent
 import com.example.activitysharing.data.database.model.EventWithUserImages
-import com.example.activitysharing.data.database.model.UserDisplayImage
 
 @Dao
 interface EventDao {

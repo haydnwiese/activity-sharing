@@ -1,16 +1,19 @@
 package com.example.activitysharing.data.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.example.activitysharing.data.database.entity.DatabaseEvent
+import androidx.room.*
+import com.example.activitysharing.data.database.model.DatabaseEvent
+import com.example.activitysharing.data.database.model.EventWithUserImages
+import com.example.activitysharing.data.database.model.UserDisplayImage
 
 @Dao
 interface EventDao {
     @Query("SELECT * FROM event")
     fun getEvents(): LiveData<List<DatabaseEvent>>
+
+    @Transaction
+    @Query("SELECT * FROM event")
+    fun getEventsWithUserDisplayImages(): LiveData<List<EventWithUserImages>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(events: List<DatabaseEvent>)

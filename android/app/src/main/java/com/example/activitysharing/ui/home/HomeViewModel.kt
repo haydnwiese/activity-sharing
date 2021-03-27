@@ -1,12 +1,11 @@
 package com.example.activitysharing.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.activitysharing.data.api.EventService
-import com.example.activitysharing.data.model.Event
+import com.example.activitysharing.data.network.EventService
+import com.example.activitysharing.data.domain.Event
 import kotlinx.coroutines.launch
 
 class HomeViewModel: ViewModel() {

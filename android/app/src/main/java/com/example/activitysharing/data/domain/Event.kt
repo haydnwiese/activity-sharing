@@ -1,11 +1,11 @@
-package com.example.activitysharing.data.model
+package com.example.activitysharing.data.domain
 
 import androidx.recyclerview.widget.DiffUtil
 
 data class Event(
     val id: Long,
-    val name: String,
-    val displayImage: String,
+    val eventName: String,
+    val displayImageUrl: String,
     val timeCreated: Long,
     val eventTime: Long,
     val createdBy: Long,

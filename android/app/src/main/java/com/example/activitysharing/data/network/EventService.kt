@@ -1,8 +1,8 @@
-package com.example.activitysharing.data.api
+package com.example.activitysharing.data.network
 
-import com.example.activitysharing.data.model.Event
+import com.example.activitysharing.data.domain.Event
 
-class EventService() {
+class EventService {
     private val api = ServiceBuilder.buildService(EventAPI::class.java)
 
     suspend fun fetchUpcomingEvents(userId: String): List<Event> {

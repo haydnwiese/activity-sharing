@@ -10,7 +10,8 @@ import com.example.activitysharing.data.repository.EventsRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(private val eventsRepository: EventsRepository): ViewModel() {
+class HomeViewModel @Inject constructor(private val eventsRepository: EventsRepository) :
+    ViewModel() {
 
     val upcomingEvents: LiveData<List<Event>>
         get() = eventsRepository.events
@@ -19,9 +20,7 @@ class HomeViewModel @Inject constructor(private val eventsRepository: EventsRepo
         refreshUpcomingEvents()
     }
 
-    fun refreshUpcomingEvents() {
-        viewModelScope.launch {
-            eventsRepository.refreshEvents()
-        }
+    fun refreshUpcomingEvents(): LiveData<Boolean> {
+        return eventsRepository.refreshEvents()
     }
 }

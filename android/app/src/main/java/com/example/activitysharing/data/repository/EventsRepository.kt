@@ -2,6 +2,7 @@ package com.example.activitysharing.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.liveData
 import com.example.activitysharing.data.database.AppDatabase
 import com.example.activitysharing.data.database.dao.EventDao
 import com.example.activitysharing.data.database.dao.EventUserDisplayImageDao
@@ -25,13 +26,19 @@ class EventsRepository @Inject constructor(
             it.asDomainModel()
         }
 
-    suspend fun refreshEvents() {
-        withContext(Dispatchers.IO) {
+    // TODO: Update to return a result object to the ViewModel
+    fun refreshEvents(): LiveData<Boolean> = liveData(Dispatchers.IO) {
+        emit(true)
+
+        try {
             val events = eventService.fetchUpcomingEvents("haydn").asDatabaseModel()
             eventDao.insertAll(events.map { it.event })
             for (event in events) {
                 eventUserDisplayImageDao.insertAll(event.eventUserDisplayImages)
             }
+            emit(false)
+        } catch (throwable: Throwable) {
+            // TODO: Implement better error handling
         }
     }
 }

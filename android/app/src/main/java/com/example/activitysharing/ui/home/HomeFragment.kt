@@ -38,8 +38,18 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.swipeContainer.setOnRefreshListener {
+            refreshEvents()
+        }
+
         viewModel.upcomingEvents.observe(viewLifecycleOwner, { events ->
             eventAdapter.submitList(events.toMutableList())
         })
+    }
+
+    private fun refreshEvents() {
+        viewModel.refreshUpcomingEvents().observe(viewLifecycleOwner) {
+            binding.swipeContainer.isRefreshing = it
+        }
     }
 }

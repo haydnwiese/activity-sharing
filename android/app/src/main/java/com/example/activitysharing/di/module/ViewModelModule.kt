@@ -1,14 +1,12 @@
-package com.example.activitysharing.di
+package com.example.activitysharing.di.module
 
 import androidx.lifecycle.ViewModel
-import com.example.activitysharing.data.database.AppDatabase
 import com.example.activitysharing.ui.common.ViewModelFactory
 import com.example.activitysharing.ui.home.HomeViewModel
 import dagger.MapKey
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
-import java.lang.annotation.RetentionPolicy
 import javax.inject.Provider
 import kotlin.reflect.KClass
 

@@ -1,4 +1,4 @@
-package com.example.activitysharing.di
+package com.example.activitysharing.di.module
 
 import android.app.Application
 import android.content.Context

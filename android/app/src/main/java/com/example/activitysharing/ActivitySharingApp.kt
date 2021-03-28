@@ -1,8 +1,8 @@
 package com.example.activitysharing
 
 import android.app.Application
-import com.example.activitysharing.di.AppComponent
-import com.example.activitysharing.di.DaggerAppComponent
+import com.example.activitysharing.di.component.AppComponent
+import com.example.activitysharing.di.component.DaggerAppComponent
 
 class ActivitySharingApp: Application() {
 

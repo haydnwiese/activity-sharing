@@ -16,4 +16,7 @@ interface EventDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(events: List<DatabaseEvent>)
+
+    @Query("DELETE FROM Event WHERE Event.id NOT IN(:eventIds)")
+    fun deleteOldEvents(eventIds: List<Long>)
 }

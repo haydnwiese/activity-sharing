@@ -6,6 +6,7 @@ import androidx.lifecycle.liveData
 import com.example.activitysharing.data.database.AppDatabase
 import com.example.activitysharing.data.database.dao.EventDao
 import com.example.activitysharing.data.database.dao.EventUserDisplayImageDao
+import com.example.activitysharing.data.database.model.EventUserDisplayImage
 import com.example.activitysharing.data.database.model.EventWithUserImages
 import com.example.activitysharing.data.database.model.asDomainModel
 import com.example.activitysharing.data.domain.Event
@@ -32,13 +33,27 @@ class EventsRepository @Inject constructor(
 
         try {
             val events = eventService.fetchUpcomingEvents("haydn").asDatabaseModel()
-            eventDao.insertAll(events.map { it.event })
-            for (event in events) {
-                eventUserDisplayImageDao.insertAll(event.eventUserDisplayImages)
-            }
+            updateEventsDatabase(events)
             emit(false)
         } catch (throwable: Throwable) {
             // TODO: Implement better error handling
+        }
+    }
+
+    private suspend fun updateEventsDatabase(events: List<EventWithUserImages>) {
+        withContext(Dispatchers.IO) {
+            eventDao.insertAll(events.map { it.event })
+
+            val eventUserDisplayImages = arrayListOf<EventUserDisplayImage>()
+            for (event in events) {
+                eventUserDisplayImages.addAll(event.eventUserDisplayImages)
+            }
+            eventUserDisplayImageDao.insertAll(eventUserDisplayImages)
+
+            val eventIds = events.map {
+                it.event.id
+            }
+            eventDao.deleteOldEvents(eventIds)
         }
     }
 }

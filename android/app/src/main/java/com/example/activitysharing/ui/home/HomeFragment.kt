@@ -1,13 +1,17 @@
 package com.example.activitysharing.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.activitysharing.ActivitySharingApp
 import com.example.activitysharing.databinding.FragmentHomeBinding
+import com.example.activitysharing.ui.common.ViewModelFactory
 import com.example.activitysharing.ui.common.adapters.EventAdapter
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
 
@@ -15,9 +19,17 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val eventAdapter = EventAdapter()
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    override fun onAttach(context: Context) {
+        (context.applicationContext as ActivitySharingApp).appComp().inject(this)
+        super.onAttach(context)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+                              savedInstanceState: Bundle?): View {
+        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
         binding = FragmentHomeBinding.inflate(layoutInflater)
         binding.recyclerView.adapter = eventAdapter
         return binding.root

@@ -77,4 +77,11 @@ dependencies {
     def room_version = "2.2.6"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:2.33"
+    implementation "com.google.dagger:dagger-android:2.33"
+    implementation "com.google.dagger:dagger-android-support:2.33"
+    kapt "com.google.dagger:dagger-compiler:2.33"
+    kapt "com.google.dagger:dagger-android-processor:2.33"
 }

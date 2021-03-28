@@ -20,3 +20,9 @@ data class EventUserDisplayImage(
     @ColumnInfo(name = "image_url")
     val imageUrl: String
 )
+
+fun List<EventUserDisplayImage>.asUrlList(): List<String> {
+    return map {
+        it.imageUrl
+    }
+}

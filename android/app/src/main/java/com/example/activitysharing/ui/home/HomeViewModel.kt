@@ -6,22 +6,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.activitysharing.data.network.EventService
 import com.example.activitysharing.data.domain.Event
+import com.example.activitysharing.data.repository.EventsRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel @Inject constructor(private val eventsRepository: EventsRepository): ViewModel() {
 
-    private val _upcomingEvents = MutableLiveData<List<Event>>()
     val upcomingEvents: LiveData<List<Event>>
-        get() = _upcomingEvents
+        get() = eventsRepository.events
 
     init {
-        fetchUpcomingEvents()
+        refreshUpcomingEvents()
     }
 
-    fun fetchUpcomingEvents() {
+    fun refreshUpcomingEvents() {
         viewModelScope.launch {
-            val events = EventService().fetchUpcomingEvents("haydn")
-            _upcomingEvents.value = events
+            eventsRepository.refreshEvents()
         }
     }
 }

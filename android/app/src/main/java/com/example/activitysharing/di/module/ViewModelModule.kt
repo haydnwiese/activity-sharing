@@ -1,6 +1,7 @@
 package com.example.activitysharing.di.module
 
 import androidx.lifecycle.ViewModel
+import com.example.activitysharing.data.repository.EventsRepository
 import com.example.activitysharing.ui.common.ViewModelFactory
 import com.example.activitysharing.ui.home.HomeViewModel
 import dagger.MapKey
@@ -28,7 +29,7 @@ class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    fun providesHomeViewModel(): ViewModel {
-        return HomeViewModel()
+    fun providesHomeViewModel(eventsRepository: EventsRepository): ViewModel {
+        return HomeViewModel(eventsRepository)
     }
 }

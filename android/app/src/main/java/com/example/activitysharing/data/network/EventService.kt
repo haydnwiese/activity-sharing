@@ -1,9 +1,9 @@
 package com.example.activitysharing.data.network
 
 import com.example.activitysharing.data.domain.Event
+import javax.inject.Inject
 
-class EventService {
-    private val api = ServiceBuilder.buildService(EventAPI::class.java)
+class EventService @Inject constructor(private val api: EventAPI) {
 
     suspend fun fetchUpcomingEvents(userId: String): List<Event> {
         return api.fetchUpcomingEvents(userId)

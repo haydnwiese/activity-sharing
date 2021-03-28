@@ -14,17 +14,3 @@ abstract class AppDatabase: RoomDatabase() {
     abstract val eventDao: EventDao
     abstract val eventUserDisplayImageDao: EventUserDisplayImageDao
 }
-
-private lateinit var INSTANCE: AppDatabase
-
-// TODO: Update to use dependency injection
-fun getDatabase(context: Context): AppDatabase {
-    synchronized(AppDatabase::class.java) {
-        if (!::INSTANCE.isInitialized) {
-            INSTANCE = Room.databaseBuilder(context.applicationContext,
-                AppDatabase::class.java,
-                "events").build()
-        }
-    }
-    return INSTANCE
-}

@@ -1,12 +1,11 @@
 package com.example.activitysharing.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.activitysharing.data.network.EventService
 import com.example.activitysharing.data.domain.Event
 import com.example.activitysharing.data.repository.EventsRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,11 +15,16 @@ class HomeViewModel @Inject constructor(private val eventsRepository: EventsRepo
     val upcomingEvents: LiveData<List<Event>>
         get() = eventsRepository.events
 
+    val refreshStatus: LiveData<Boolean>
+        get() = eventsRepository.refreshStatus.asLiveData()
+
     init {
         refreshUpcomingEvents()
     }
 
-    fun refreshUpcomingEvents(): LiveData<Boolean> {
-        return eventsRepository.refreshEvents()
+    fun refreshUpcomingEvents() {
+        viewModelScope.launch {
+            eventsRepository.refreshEvents()
+        }
     }
 }

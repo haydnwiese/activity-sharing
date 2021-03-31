@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.activitysharing.ActivitySharingApp
 import com.example.activitysharing.databinding.FragmentHomeBinding
@@ -39,17 +40,17 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.swipeContainer.setOnRefreshListener {
-            refreshEvents()
+            viewModel.refreshUpcomingEvents()
+        }
+
+        viewModel.refreshStatus.observe(viewLifecycleOwner) { isRefreshing ->
+            if (binding.swipeContainer.isRefreshing && !isRefreshing) {
+                binding.swipeContainer.isRefreshing = false
+            }
         }
 
         viewModel.upcomingEvents.observe(viewLifecycleOwner, { events ->
             eventAdapter.submitList(events.toMutableList())
         })
-    }
-
-    private fun refreshEvents() {
-        viewModel.refreshUpcomingEvents().observe(viewLifecycleOwner) {
-            binding.swipeContainer.isRefreshing = it
-        }
     }
 }

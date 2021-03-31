@@ -3,6 +3,7 @@ package com.example.activitysharing
 import android.app.Application
 import com.example.activitysharing.di.component.AppComponent
 import com.example.activitysharing.di.component.DaggerAppComponent
+import timber.log.Timber
 
 class ActivitySharingApp: Application() {
 
@@ -10,6 +11,9 @@ class ActivitySharingApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        Timber.plant(Timber.DebugTree())
+
         appComponent = DaggerAppComponent
             .builder()
             .application(this)

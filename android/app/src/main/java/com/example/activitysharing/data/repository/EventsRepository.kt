@@ -2,8 +2,6 @@ package com.example.activitysharing.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.liveData
-import com.example.activitysharing.data.database.AppDatabase
 import com.example.activitysharing.data.database.dao.EventDao
 import com.example.activitysharing.data.database.dao.EventUserDisplayImageDao
 import com.example.activitysharing.data.database.model.EventUserDisplayImage
@@ -13,7 +11,10 @@ import com.example.activitysharing.data.domain.Event
 import com.example.activitysharing.data.network.EventService
 import com.example.activitysharing.data.network.model.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class EventsRepository @Inject constructor(
@@ -22,21 +23,27 @@ class EventsRepository @Inject constructor(
     private val eventService: EventService
 ) {
 
+    private val _refreshStatus = MutableStateFlow(false)
+    val refreshStatus: StateFlow<Boolean>
+        get() = _refreshStatus
+
     val events: LiveData<List<Event>> =
         Transformations.map(eventDao.getEventsWithUserDisplayImages()) {
             it.asDomainModel()
         }
 
     // TODO: Update to return a result object to the ViewModel
-    fun refreshEvents(): LiveData<Boolean> = liveData(Dispatchers.IO) {
-        emit(true)
-
-        try {
-            val events = eventService.fetchUpcomingEvents("haydn").asDatabaseModel()
-            updateEventsDatabase(events)
-            emit(false)
-        } catch (throwable: Throwable) {
-            // TODO: Implement better error handling
+    suspend fun refreshEvents() {
+        _refreshStatus.value = true
+        withContext(Dispatchers.IO) {
+            try {
+                val events = eventService.fetchUpcomingEvents("haydn").asDatabaseModel()
+                updateEventsDatabase(events)
+                _refreshStatus.value = false
+            } catch (throwable: Throwable) {
+                // TODO: Implement better error handling
+                Timber.d("Something went wrong")
+            }
         }
     }
 

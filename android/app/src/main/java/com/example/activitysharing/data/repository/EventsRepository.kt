@@ -35,15 +35,13 @@ class EventsRepository @Inject constructor(
     // TODO: Update to return a result object to the ViewModel
     suspend fun refreshEvents() {
         _refreshStatus.value = true
-        withContext(Dispatchers.IO) {
-            try {
-                val events = eventService.fetchUpcomingEvents("haydn").asDatabaseModel()
-                updateEventsDatabase(events)
-                _refreshStatus.value = false
-            } catch (throwable: Throwable) {
-                // TODO: Implement better error handling
-                Timber.d("Something went wrong")
-            }
+        try {
+            val events = eventService.fetchUpcomingEvents("haydn").asDatabaseModel()
+            updateEventsDatabase(events)
+            _refreshStatus.value = false
+        } catch (throwable: Throwable) {
+            // TODO: Implement better error handling
+            Timber.d("Something went wrong")
         }
     }
 

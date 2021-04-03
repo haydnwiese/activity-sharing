@@ -6,10 +6,14 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginVertical="@dimen/grid_1"
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    app:cardCornerRadius="6dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/grey_outline"
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,8 +24,8 @@
         <ImageView
             android:id="@+id/header_image"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
+            android:layout_height="120dp"
+            tools:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <LinearLayout

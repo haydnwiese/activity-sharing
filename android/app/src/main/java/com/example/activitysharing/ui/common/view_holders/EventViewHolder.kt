@@ -16,6 +16,7 @@ class EventViewHolder(private val binding: ListItemEventBinding) : RecyclerView.
             eventTitle.text = item.eventName
             Glide.with(root)
                 .load(item.displayImageUrl)
+                .centerCrop()
                 .into(headerImage)
         }
     }

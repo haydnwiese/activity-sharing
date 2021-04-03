@@ -11,6 +11,7 @@ class NetworkEvent(
     val timeCreated: Long,
     val eventTime: Long,
     val createdBy: Long,
+    val numberAttending: Long,
     val usersAttendingPreviewUrls: List<String>
 )
 
@@ -31,7 +32,8 @@ fun List<NetworkEvent>.asDatabaseModel(): List<EventWithUserImages> {
                 displayImageUrl = networkEvent.displayImageUrl,
                 timeCreated = networkEvent.timeCreated,
                 eventTime = networkEvent.eventTime,
-                createdBy = networkEvent.createdBy
+                createdBy = networkEvent.createdBy,
+                numberAttending = networkEvent.numberAttending
             ),
             eventUserDisplayImages
         )

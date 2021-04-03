@@ -9,6 +9,7 @@ data class Event(
     val timeCreated: Long,
     val eventTime: Long,
     val createdBy: Long,
+    val numberAttending: Long,
     val usersAttendingPreviewUrls: List<String>
 )
 

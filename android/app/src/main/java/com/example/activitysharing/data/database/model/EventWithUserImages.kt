@@ -24,6 +24,7 @@ fun List<EventWithUserImages>.asDomainModel(): List<Event> {
             event.timeCreated,
             event.eventTime,
             event.createdBy,
+            event.numberAttending,
             it.eventUserDisplayImages.asUrlList()
         )
     }

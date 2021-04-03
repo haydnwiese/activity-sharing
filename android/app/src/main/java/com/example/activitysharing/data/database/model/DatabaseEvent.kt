@@ -11,5 +11,6 @@ data class DatabaseEvent(
     val displayImageUrl: String,
     val timeCreated: Long,
     val eventTime: Long,
-    val createdBy: Long
+    val createdBy: Long,
+    val numberAttending: Long
 )

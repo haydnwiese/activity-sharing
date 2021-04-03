@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="login_input_width">328dp</dimen>
+    <dimen name="attendee_image_preview_size">25dp</dimen>
+    <dimen name="attendee_image_preview_space">3dp</dimen>
 </resources>

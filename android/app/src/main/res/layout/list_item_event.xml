@@ -28,10 +28,9 @@
             tools:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="16dp">
 
             <!-- Title, secondary and supporting text -->
@@ -41,6 +40,8 @@
                 android:layout_height="wrap_content"
                 android:text="Basketball"
                 android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 />
 
             <TextView
@@ -51,9 +52,71 @@
                 android:text="Saturday, February 27"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary"
+                app:layout_constraintTop_toBottomOf="@id/event_title"
+                app:layout_constraintStart_toStartOf="parent"
                 />
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/attendee_preview_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/attendee_image_view1"
+                    android:layout_width="@dimen/attendee_image_preview_size"
+                    android:layout_height="@dimen/attendee_image_preview_size"
+                    android:scaleType="centerCrop"
+                    android:src="@color/black"
+                    app:shapeAppearance="@style/ShapeAppearance.App.CircleImageView"
+                    tools:src="@tools:sample/avatars"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/attendee_image_view2"
+                    android:layout_width="@dimen/attendee_image_preview_size"
+                    android:layout_height="@dimen/attendee_image_preview_size"
+                    android:layout_marginStart="@dimen/attendee_image_preview_space"
+                    android:scaleType="centerCrop"
+                    android:src="@color/black"
+                    app:shapeAppearance="@style/ShapeAppearance.App.CircleImageView"
+                    tools:src="@tools:sample/avatars"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/attendee_image_preview_space">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/blurred_attendee_image_view"
+                        android:layout_width="@dimen/attendee_image_preview_size"
+                        android:layout_height="@dimen/attendee_image_preview_size"
+                        android:scaleType="centerCrop"
+                        android:src="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearance="@style/ShapeAppearance.App.CircleImageView"
+                        tools:src="@tools:sample/avatars" />
+
+                    <TextView
+                        android:id="@+id/attendee_number_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:text="+5"
+                        app:layout_constraintStart_toStartOf="@id/blurred_attendee_image_view"
+                        app:layout_constraintTop_toTopOf="@id/blurred_attendee_image_view"
+                        app:layout_constraintBottom_toBottomOf="@id/blurred_attendee_image_view"
+                        app:layout_constraintEnd_toEndOf="@id/blurred_attendee_image_view" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

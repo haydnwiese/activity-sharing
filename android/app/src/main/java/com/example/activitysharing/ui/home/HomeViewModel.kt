@@ -1,11 +1,15 @@
 package com.example.activitysharing.ui.home
 
-import androidx.lifecycle.*
-import com.example.activitysharing.data.network.EventService
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.activitysharing.data.domain.Event
 import com.example.activitysharing.data.repository.EventsRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.example.activitysharing.util.GREETING_AFTERNOON
+import com.example.activitysharing.util.GREETING_EVENING
+import com.example.activitysharing.util.GREETING_HELLO
+import com.example.activitysharing.util.GREETING_MORNING
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -35,9 +39,9 @@ class HomeViewModel @Inject constructor(private val eventsRepository: EventsRepo
 
     private fun getTimeBasedGreetingMessage(): String =
         when (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
-            in 0..12 -> "Good morning"
-            in 13..16 -> "Good afternoon"
-            in 17..23 -> "Good evening"
-            else -> "Hello"
+            in 0..12 -> GREETING_MORNING
+            in 13..16 -> GREETING_AFTERNOON
+            in 17..23 -> GREETING_EVENING
+            else -> GREETING_HELLO
         }
 }

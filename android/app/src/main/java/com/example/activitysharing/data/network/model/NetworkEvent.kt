@@ -7,7 +7,7 @@ import com.example.activitysharing.data.database.model.EventWithUserImages
 class NetworkEvent(
     val id: Long,
     val eventName: String,
-    val displayImageUrl: String,
+    val displayImageUrl: String?,
     val timeCreated: Long,
     val eventTime: Long,
     val createdBy: Long,

@@ -29,7 +29,7 @@ class EventViewHolder(private val binding: ListItemEventBinding) :
 
     // TODO: Maybe optimize i.e. programmatically create views
     private fun loadImages(item: Event, glide: RequestManager) {
-        updateImageViewVisibilities(item.numberAttending)
+        updateImageViewVisibilities(item)
 
         with(binding) {
             val attendeeImageViews = listOf(attendeeImageView1, attendeeImageView2, blurredAttendeeImageView)
@@ -42,12 +42,15 @@ class EventViewHolder(private val binding: ListItemEventBinding) :
 
                 glideRequest.into(attendeeImageViews[i])
             }
-            glide.loadWithOptions(item.displayImageUrl).into(headerImage)
+            item.displayImageUrl?.let { glide.loadWithOptions(it).into(headerImage) }
         }
     }
 
-    private fun updateImageViewVisibilities(numberAttendees: Int) {
+    private fun updateImageViewVisibilities(item: Event) {
+        val numberAttendees = item.numberAttending
         with(binding) {
+            headerImage.visibility = if (item.displayImageUrl == null) View.GONE else View.VISIBLE
+
             when {
                 numberAttendees >= 3 -> {
                     attendeeImageView1.visibility = View.VISIBLE

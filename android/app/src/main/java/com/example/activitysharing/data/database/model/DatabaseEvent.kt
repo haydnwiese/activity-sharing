@@ -8,7 +8,7 @@ data class DatabaseEvent(
     @PrimaryKey
     val id: Long,
     val eventName: String,
-    val displayImageUrl: String,
+    val displayImageUrl: String?,
     val timeCreated: Long,
     val eventTime: Long,
     val createdBy: Long,

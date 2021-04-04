@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding.viewModel = viewModel
         eventAdapter = EventAdapter(Glide.with(this))
         binding.recyclerView.adapter = eventAdapter
         return binding.root
@@ -40,11 +41,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initObservers()
 
         binding.swipeContainer.setOnRefreshListener {
             viewModel.refreshUpcomingEvents()
         }
+    }
 
+    private fun initObservers() {
         viewModel.refreshStatus.observe(viewLifecycleOwner) { isRefreshing ->
             if (binding.swipeContainer.isRefreshing && !isRefreshing) {
                 binding.swipeContainer.isRefreshing = false

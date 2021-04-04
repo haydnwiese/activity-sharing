@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable name="viewModel" type="com.example.activitysharing.ui.home.HomeViewModel"/>
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -85,7 +89,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello Haydn" />
+                        android:fontFamily="sans-serif"
+                        android:textSize="@dimen/large_heading"
+                        android:textColor="@color/black"
+                        android:text="@{String.format(@string/greeting, viewModel.timeBasedGreeting, viewModel.userFirstName)}"
+                        tools:text="Good morning,\nHaydn"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textSize="@dimen/subheading"
+                        android:textColor="@color/black"
+                        android:text="@string/upcoming_events" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view"

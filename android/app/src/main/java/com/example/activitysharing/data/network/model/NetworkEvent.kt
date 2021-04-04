@@ -11,7 +11,7 @@ class NetworkEvent(
     val timeCreated: Long,
     val eventTime: Long,
     val createdBy: Long,
-    val numberAttending: Long,
+    val numberAttending: Int,
     val usersAttendingPreviewUrls: List<String>
 )
 

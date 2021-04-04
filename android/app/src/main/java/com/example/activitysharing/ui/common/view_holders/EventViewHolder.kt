@@ -1,13 +1,20 @@
 package com.example.activitysharing.ui.common.view_holders
 
+import android.graphics.drawable.Drawable
 import android.view.View
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.activitysharing.data.domain.Event
 import com.example.activitysharing.databinding.ListItemEventBinding
+import jp.wasabeef.glide.transformations.BlurTransformation
 
-class EventViewHolder(private val binding: ListItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
+class EventViewHolder(private val binding: ListItemEventBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Event, glide: RequestManager) {
         bindDetails(item)
@@ -17,29 +24,43 @@ class EventViewHolder(private val binding: ListItemEventBinding) : RecyclerView.
     private fun bindDetails(item: Event) {
         binding.run {
             eventTitle.text = item.eventName
-            Glide.with(root)
-                .load(item.displayImageUrl)
-                .centerCrop()
-                .into(headerImage)
         }
     }
 
     // TODO: Maybe optimize i.e. programmatically create views
     private fun loadImages(item: Event, glide: RequestManager) {
-        binding.run {
+        updateImageViewVisibilities(item.numberAttending)
+
+        with(binding) {
+            val attendeeImageViews = listOf(attendeeImageView1, attendeeImageView2, blurredAttendeeImageView)
+            for (i in attendeeImageViews.indices) {
+                if (i >= item.usersAttendingPreviewUrls.size) break
+
+                var glideRequest = glide.loadWithOptions(item.usersAttendingPreviewUrls[i])
+                if (i == attendeeImageViews.lastIndex)
+                    glideRequest = glideRequest.apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
+
+                glideRequest.into(attendeeImageViews[i])
+            }
+            glide.loadWithOptions(item.displayImageUrl).into(headerImage)
+        }
+    }
+
+    private fun updateImageViewVisibilities(numberAttendees: Int) {
+        with(binding) {
             when {
-                item.numberAttending > 2 -> {
+                numberAttendees >= 3 -> {
                     attendeeImageView1.visibility = View.VISIBLE
                     attendeeImageView2.visibility = View.VISIBLE
                     blurredAttendeeContainer.visibility = View.VISIBLE
-                    attendeeNumberTextView.text = String.format("+%s", item.numberAttending - 2)
+                    attendeeNumberTextView.text = String.format("+%s", numberAttendees - 2)
                 }
-                item.numberAttending == 2L -> {
+                numberAttendees == 2 -> {
                     attendeeImageView1.visibility = View.VISIBLE
                     attendeeImageView2.visibility = View.VISIBLE
                     blurredAttendeeContainer.visibility = View.GONE
                 }
-                item.numberAttending == 1L -> {
+                numberAttendees == 1 -> {
                     attendeeImageView1.visibility = View.VISIBLE
                     attendeeImageView2.visibility = View.GONE
                     blurredAttendeeContainer.visibility = View.GONE
@@ -49,5 +70,11 @@ class EventViewHolder(private val binding: ListItemEventBinding) : RecyclerView.
                 }
             }
         }
+    }
+
+    private fun RequestManager.loadWithOptions(url: String): RequestBuilder<Drawable> {
+        return load(url)
+            .centerCrop()
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
     }
 }

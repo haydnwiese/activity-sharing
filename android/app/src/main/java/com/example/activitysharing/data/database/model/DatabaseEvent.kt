@@ -12,5 +12,5 @@ data class DatabaseEvent(
     val timeCreated: Long,
     val eventTime: Long,
     val createdBy: Long,
-    val numberAttending: Long
+    val numberAttending: Int
 )

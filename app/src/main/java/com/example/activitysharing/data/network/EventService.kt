@@ -9,6 +9,6 @@ import javax.inject.Inject
 class EventService @Inject constructor(private val api: EventAPI) {
 
     suspend fun fetchUpcomingEvents(userId: String): List<NetworkEvent> = withContext(Dispatchers.IO) {
-            api.fetchUpcomingEvents(userId)
+        api.fetchUpcomingEvents(userId)
     }
 }

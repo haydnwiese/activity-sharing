@@ -9,7 +9,7 @@ import com.example.activitysharing.data.database.dao.EventUserDisplayImageDao
 import com.example.activitysharing.data.database.model.DatabaseEvent
 import com.example.activitysharing.data.database.model.EventUserDisplayImage
 
-@Database(entities = [DatabaseEvent::class, EventUserDisplayImage::class], version = 1)
+@Database(entities = [DatabaseEvent::class, EventUserDisplayImage::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract val eventDao: EventDao
     abstract val eventUserDisplayImageDao: EventUserDisplayImageDao

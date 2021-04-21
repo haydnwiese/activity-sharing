@@ -2,9 +2,11 @@ package com.example.activitysharing.di.module
 
 import com.example.activitysharing.data.network.EventAPI
 import com.example.activitysharing.data.network.EventService
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -27,9 +29,10 @@ class RetrofitModule {
     @Singleton
     @Provides
     fun providesRetrofit(client: OkHttpClient): Retrofit {
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm").create()
         return Retrofit.Builder()
-            .baseUrl("https://c4e836d5-1544-4b52-9c15-35683f09a91b.mock.pstmn.io/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("http://10.0.2.2:3000/")
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
     }
@@ -37,6 +40,11 @@ class RetrofitModule {
     @Singleton
     @Provides
     fun providesOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().build()
+        val logging = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+        return OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build()
     }
 }

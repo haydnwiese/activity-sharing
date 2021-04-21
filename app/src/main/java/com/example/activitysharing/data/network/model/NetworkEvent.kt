@@ -3,16 +3,18 @@ package com.example.activitysharing.data.network.model
 import com.example.activitysharing.data.database.model.DatabaseEvent
 import com.example.activitysharing.data.database.model.EventUserDisplayImage
 import com.example.activitysharing.data.database.model.EventWithUserImages
+import com.google.gson.annotations.SerializedName
+import java.util.*
 
-class NetworkEvent(
-    val id: Long,
-    val eventName: String,
-    val displayImageUrl: String?,
-    val timeCreated: Long,
-    val eventTime: Long,
-    val createdBy: Long,
-    val numberAttending: Int,
-    val usersAttendingPreviewUrls: List<String>
+data class NetworkEvent(
+        val id: Long,
+        @SerializedName("title") val eventName: String,
+        @SerializedName("remoteImageId") val displayImageUrl: String?,
+        @SerializedName("createdAt") val timeCreated: Date,
+        @SerializedName("scheduledAt") val eventTime: Date,
+        @SerializedName("creatorId") val createdBy: Long,
+        @SerializedName("attendeeCount") val numberAttending: Int,
+        @SerializedName("userDisplayImageUrls") val usersAttendingPreviewUrls: List<String>
 )
 
 // TODO: Find a better way to do this

@@ -36,7 +36,7 @@ class EventsRepository @Inject constructor(
     suspend fun refreshEvents() {
         _refreshStatus.value = true
         try {
-            val events = eventService.fetchUpcomingEvents("haydn").asDatabaseModel()
+            val events = eventService.fetchUpcomingEvents("hdghg").asDatabaseModel()
             updateEventsDatabase(events)
             _refreshStatus.value = false
         } catch (throwable: Throwable) {

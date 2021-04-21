@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface EventAPI {
-    @GET("/upcoming-events/{userId}")
+    @GET("/users/{userId}/event-feed")
     suspend fun fetchUpcomingEvents(@Path("userId") userId: String): List<NetworkEvent>
 }

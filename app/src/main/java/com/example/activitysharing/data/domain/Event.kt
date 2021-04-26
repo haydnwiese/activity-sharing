@@ -1,16 +1,17 @@
 package com.example.activitysharing.data.domain
 
 import androidx.recyclerview.widget.DiffUtil
+import java.util.*
 
 data class Event(
-    val id: Long,
-    val eventName: String,
-    val displayImageUrl: String?,
-    val timeCreated: Long,
-    val eventTime: Long,
-    val createdBy: Long,
-    val numberAttending: Int,
-    val usersAttendingPreviewUrls: List<String>
+        val id: Long,
+        val eventName: String,
+        val displayImageUrl: String?,
+        val timeCreated: Date,
+        val eventTime: Date,
+        val createdBy: Long,
+        val numberAttending: Int,
+        val usersAttendingPreviewUrls: List<String>
 )
 
 object EventDiffCallBack: DiffUtil.ItemCallback<Event>() {

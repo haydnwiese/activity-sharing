@@ -12,6 +12,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.activitysharing.data.domain.Event
 import com.example.activitysharing.databinding.ListItemEventBinding
 import jp.wasabeef.glide.transformations.BlurTransformation
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EventViewHolder(private val binding: ListItemEventBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -22,8 +24,9 @@ class EventViewHolder(private val binding: ListItemEventBinding) :
     }
 
     private fun bindDetails(item: Event) {
-        binding.run {
+        with(binding) {
             eventTitle.text = item.eventName
+            eventTime.text = this@EventViewHolder.formatDate(item.eventTime)
         }
     }
 
@@ -73,6 +76,11 @@ class EventViewHolder(private val binding: ListItemEventBinding) :
                 }
             }
         }
+    }
+
+    private fun formatDate(date: Date): String {
+        val dateFormat = SimpleDateFormat("EEE, MMMM d 'at' h:mm a")
+        return dateFormat.format(date)
     }
 
     private fun RequestManager.loadWithOptions(url: String): RequestBuilder<Drawable> {

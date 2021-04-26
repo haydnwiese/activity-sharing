@@ -4,15 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.activitysharing.data.database.model.DatabaseEvent
 import com.example.activitysharing.data.database.model.EventWithUserImages
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface EventDao {
     @Query("SELECT * FROM event")
-    fun getEvents(): LiveData<List<DatabaseEvent>>
+    fun getEvents(): Flow<List<DatabaseEvent>>
 
     @Transaction
     @Query("SELECT * FROM event")
-    fun getEventsWithUserDisplayImages(): LiveData<List<EventWithUserImages>>
+    fun getEventsWithUserDisplayImages(): Flow<List<EventWithUserImages>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(events: List<DatabaseEvent>)

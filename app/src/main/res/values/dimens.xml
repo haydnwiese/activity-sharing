@@ -3,6 +3,7 @@
     <dimen name="login_input_width">328dp</dimen>
     <dimen name="attendee_image_preview_size">25dp</dimen>
     <dimen name="attendee_image_preview_space">3dp</dimen>
+    <dimen name="profile_image_size">120dp</dimen>
     <dimen name="subheading">18sp</dimen>
     <dimen name="large_heading">35sp</dimen>
 </resources>

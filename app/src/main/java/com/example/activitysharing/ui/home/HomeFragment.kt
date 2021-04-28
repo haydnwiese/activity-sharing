@@ -9,8 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.activitysharing.ActivitySharingApp
+import com.example.activitysharing.R
 import com.example.activitysharing.databinding.FragmentHomeBinding
 import com.example.activitysharing.ui.common.ViewModelFactory
 import com.example.activitysharing.ui.common.adapters.EventAdapter
@@ -46,6 +48,10 @@ class HomeFragment : Fragment() {
 
         binding.swipeContainer.setOnRefreshListener {
             viewModel.refreshUpcomingEvents()
+        }
+
+        binding.profileButton.setOnClickListener {
+            findNavController().navigate(R.id.action_global_profileFragment)
         }
     }
 

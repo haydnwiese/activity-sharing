@@ -9,5 +9,6 @@
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="upcoming_events">Upcoming Events</string>
+    <string name="your_events">Your Events</string>
     <string name="greeting">%s,\n%s</string>
 </resources>

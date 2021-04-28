@@ -2,13 +2,10 @@ package com.example.activitysharing.data.network
 
 import com.example.activitysharing.data.domain.Event
 import com.example.activitysharing.data.network.model.NetworkEvent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-class EventService @Inject constructor(private val api: EventAPI) {
-
-    suspend fun fetchUpcomingEvents(userId: String): List<NetworkEvent> = withContext(Dispatchers.IO) {
-        api.fetchUpcomingEvents(userId)
-    }
+interface EventService {
+    @GET("/users/{userId}/event-feed")
+    suspend fun fetchUpcomingEvents(@Path("userId") userId: String): List<NetworkEvent>
 }

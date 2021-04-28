@@ -25,25 +25,13 @@ class EventsRepository @Inject constructor(
     private val eventService: EventService
 ) {
 
-    private val _refreshStatus = MutableStateFlow(false)
-    val refreshStatus: StateFlow<Boolean>
-        get() = _refreshStatus
-
     val events = eventDao.getEventsWithUserDisplayImages().map {
         it.asDomainModel()
-    }.asLiveData()
+    }
 
-    // TODO: Update to return a result object to the ViewModel
     suspend fun refreshEvents() {
-        _refreshStatus.value = true
-        try {
-            val events = eventService.fetchUpcomingEvents("hdghg").asDatabaseModel()
-            updateEventsDatabase(events)
-            _refreshStatus.value = false
-        } catch (throwable: Throwable) {
-            // TODO: Implement better error handling
-            Timber.d("Something went wrong")
-        }
+        val events = eventService.fetchUpcomingEvents("hdghg").asDatabaseModel()
+        updateEventsDatabase(events)
     }
 
     private suspend fun updateEventsDatabase(events: List<EventWithUserImages>) {

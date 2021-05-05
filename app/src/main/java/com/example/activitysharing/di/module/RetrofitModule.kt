@@ -1,6 +1,7 @@
 package com.example.activitysharing.di.module
 
 import com.example.activitysharing.data.network.EventService
+import com.example.activitysharing.data.network.UserService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -17,6 +18,12 @@ class RetrofitModule {
     @Provides
     fun providesEventService(retrofit: Retrofit): EventService {
         return retrofit.create(EventService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providesUserService(retrofit: Retrofit): UserService {
+        return retrofit.create(UserService::class.java)
     }
 
     @Singleton

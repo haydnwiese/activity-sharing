@@ -4,7 +4,9 @@ import com.example.activitysharing.data.domain.Event
 import com.example.activitysharing.data.network.model.NetworkEvent
 import retrofit2.http.GET
 import retrofit2.http.Path
+import javax.inject.Singleton
 
+@Singleton
 interface EventService {
     @GET(NetworkPaths.eventFeed)
     suspend fun fetchUpcomingEvents(@Path(NetworkPaths.userIdParam) userId: String): List<NetworkEvent>

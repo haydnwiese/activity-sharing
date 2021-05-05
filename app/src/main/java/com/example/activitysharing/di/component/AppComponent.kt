@@ -6,6 +6,7 @@ import com.example.activitysharing.di.module.RetrofitModule
 import com.example.activitysharing.di.module.RoomModule
 import com.example.activitysharing.di.module.ViewModelModule
 import com.example.activitysharing.ui.home.HomeFragment
+import com.example.activitysharing.ui.profile.ProfileFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -15,6 +16,8 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(fragment: HomeFragment)
+
+    fun inject(fragment: ProfileFragment)
 
     @Component.Builder
     interface Builder {

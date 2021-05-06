@@ -11,4 +11,6 @@
     <string name="upcoming_events">Upcoming Events</string>
     <string name="your_events">Your Events</string>
     <string name="greeting">%s,\n%s</string>
+    <string name="profile_friend_count">%d Friends</string>
+    <string name="profile_name">%s %s</string>
 </resources>

@@ -15,7 +15,6 @@ class ProfileViewModel(
 
     val userProfileDetails: LiveData<NetworkUserProfile>
         get() {
-            Timber.d("Request made")
             val errorHandler = CoroutineExceptionHandler { _, _ ->
 //            _refreshStatus.postValue(false)
 //            _networkErrorMessage.postValue("Network Error")

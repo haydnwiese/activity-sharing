@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.example.activitysharing.ActivitySharingApp
 import com.example.activitysharing.R
 import com.example.activitysharing.databinding.FragmentHomeBinding
@@ -22,6 +24,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var glideRequestManager: RequestManager
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -35,17 +38,26 @@ class ProfileFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
         binding = FragmentProfileBinding.inflate(layoutInflater)
+        glideRequestManager = Glide.with(this)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
+
+        binding.closeButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun initObservers() {
         viewModel.userProfileDetails.observe(viewLifecycleOwner) { profileDetails ->
-            Timber.d(profileDetails.toString())
+            with(profileDetails) {
+                binding.nameTextView.text = getString(R.string.profile_name, firstName, lastName)
+                binding.friendCountTextView.text = getString(R.string.profile_friend_count, friendCount)
+                glideRequestManager.load(profileImageUrl).into(binding.profileImageView)
+            }
         }
     }
 }

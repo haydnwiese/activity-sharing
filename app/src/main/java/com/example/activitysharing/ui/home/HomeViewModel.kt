@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(private val eventsRepository: EventsRepo
         get() = _networkErrorMessage
 
     val upcomingEvents: LiveData<List<Event>>
-        get() = eventsRepository.events.onEach { _refreshStatus.value = false }.asLiveData()
+        get() = eventsRepository.upcomingEvents.onEach { _refreshStatus.value = false }.asLiveData()
 
     init {
         refreshUpcomingEvents()
@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(private val eventsRepository: EventsRepo
         }
         _refreshStatus.value = true
         viewModelScope.launch(errorHandler) {
-            eventsRepository.refreshEvents()
+            eventsRepository.refreshUpcomingEvents()
         }
     }
 }

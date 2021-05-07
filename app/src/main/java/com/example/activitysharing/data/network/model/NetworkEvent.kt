@@ -3,6 +3,7 @@ package com.example.activitysharing.data.network.model
 import com.example.activitysharing.data.database.model.DatabaseEvent
 import com.example.activitysharing.data.database.model.EventUserDisplayImage
 import com.example.activitysharing.data.database.model.EventWithUserImages
+import com.example.activitysharing.data.domain.Event
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
@@ -38,6 +39,21 @@ fun List<NetworkEvent>.asDatabaseModel(): List<EventWithUserImages> {
                 numberAttending = networkEvent.numberAttending
             ),
             eventUserDisplayImages
+        )
+    }
+}
+
+fun List<NetworkEvent>.asDomainModel(): List<Event> {
+    return map { networkEvent ->
+        Event(
+            id = networkEvent.id,
+            eventName = networkEvent.eventName,
+            displayImageUrl = networkEvent.displayImageUrl,
+            timeCreated = networkEvent.timeCreated,
+            eventTime = networkEvent.eventTime,
+            createdBy = networkEvent.createdBy,
+            numberAttending = networkEvent.numberAttending,
+            usersAttendingPreviewUrls = networkEvent.usersAttendingPreviewUrls
         )
     }
 }

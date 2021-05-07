@@ -12,5 +12,5 @@ interface EventService {
     suspend fun fetchUpcomingEvents(@Path(NetworkPaths.userIdParam) userId: String): List<NetworkEvent>
 
     @GET(NetworkPaths.userEvents)
-    suspend fun fetchEventsForUser(@Path(NetworkPaths.userIdParam) userId: String): List<NetworkEvent>
+    suspend fun fetchEventsForUser(@Path(NetworkPaths.userIdParam) userId: Long): List<NetworkEvent>
 }

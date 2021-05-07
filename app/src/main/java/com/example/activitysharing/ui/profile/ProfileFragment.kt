@@ -25,6 +25,7 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding: FragmentProfileBinding
     private lateinit var glideRequestManager: RequestManager
+    private lateinit var eventAdapter: EventAdapter
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -39,6 +40,8 @@ class ProfileFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
         binding = FragmentProfileBinding.inflate(layoutInflater)
         glideRequestManager = Glide.with(this)
+        eventAdapter = EventAdapter(glideRequestManager)
+        binding.recyclerView.adapter = eventAdapter
         return binding.root
     }
 
@@ -58,6 +61,10 @@ class ProfileFragment : Fragment() {
                 binding.friendCountTextView.text = getString(R.string.profile_friend_count, friendCount)
                 glideRequestManager.load(profileImageUrl).into(binding.profileImageView)
             }
+        }
+
+        viewModel.retrieveEventsForUser(2).observe(viewLifecycleOwner) { userEvents ->
+            eventAdapter.submitList(userEvents.toMutableList())
         }
     }
 }

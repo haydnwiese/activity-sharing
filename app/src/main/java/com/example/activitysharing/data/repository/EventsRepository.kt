@@ -11,6 +11,7 @@ import com.example.activitysharing.data.database.model.asDomainModel
 import com.example.activitysharing.data.domain.Event
 import com.example.activitysharing.data.network.EventService
 import com.example.activitysharing.data.network.model.asDatabaseModel
+import com.example.activitysharing.data.network.model.asDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,14 +26,16 @@ class EventsRepository @Inject constructor(
     private val eventService: EventService
 ) {
 
-    val events = eventDao.getEventsWithUserDisplayImages().map {
+    val upcomingEvents = eventDao.getEventsWithUserDisplayImages().map {
         it.asDomainModel()
     }
 
-    suspend fun refreshEvents() {
+    suspend fun refreshUpcomingEvents() {
         val events = eventService.fetchUpcomingEvents("hdghg").asDatabaseModel()
         updateEventsDatabase(events)
     }
+
+    suspend fun getEventsForUser(userId: Long) = eventService.fetchEventsForUser(userId).asDomainModel()
 
     private suspend fun updateEventsDatabase(events: List<EventWithUserImages>) {
         withContext(Dispatchers.IO) {
